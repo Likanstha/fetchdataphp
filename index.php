@@ -20,7 +20,19 @@ $data = file_get_contents('entries.json');
 $response  = json_decode($data);
 $entries = $response->entries;
 
+//retrieving API only on array
+$api_array = [];
+foreach($entries as $value){
+    if(!in_array($value->API, $api_array)){
+        $api_array[] = $value->API;
+    }
+}
+
+//sorting array in descending order
+natcasesort($api_array);
+$api_array = array_reverse($api_array, false);
+
 echo "<pre>";
-print_r($entries);
+print_r($api_array);
 echo "</pre>";
 exit();
